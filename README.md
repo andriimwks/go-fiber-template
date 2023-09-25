@@ -37,4 +37,3 @@ go run .
 ## TODOs
 - Validate forms (validator doesn't work for some reason)
 - Profile view and settings
-- Fix dropdown on PC
