@@ -11,7 +11,7 @@ func newRouter(cfg *config.Config) *fiber.App {
 	r := fiber.New(fiber.Config{
 		UnescapePath: true,
 		Views:        django.New("./www/templates", ".html"),
-		AppName:      "ad-exchange",
+		AppName:      "go-fiber-template",
 	})
 	r.Static("/static", "./www/static")
 	r.Use(
