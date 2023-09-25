@@ -1,0 +1,26 @@
+{% extends "layouts/main.html" %}
+
+{% block title %}
+    {{ block.Super }} | Sign in
+{% endblock %}
+
+{% block content %}
+    <div class="mt-3 mx-auto" style="max-width: 648px;">
+        <form class="p-3 border border-secondary rounded" action="" method="post">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="ostap@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="********">
+            </div>
+            <button type="submit" class="btn btn-primary fw-semibold">Sign in</button>
+        </form>
+        <div class="mt-3 d-flex justify-content-center">
+            <a class="btn fw-semibold text-primary-emphasis" href='{{ "user:signup"|url }}'>Sign up</a>
+            <div class="vr"></div>
+            <a class="btn fw-semibold text-primary-emphasis" href="#" disabled>Forgot password?</a>
+        </div>
+    </div>
+{% endblock %}

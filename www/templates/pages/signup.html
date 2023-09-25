@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% block title %}
+    {{ block.Super }} | {{ sign_up }}
+{% endblock %}
+
+{% block content %}
+    <div class="mt-3 mx-auto" style="max-width: 648px;">
+        <form class="p-3 border border-secondary rounded" action="" method="post">
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First name</label>
+                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Ostap">
+            </div>
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last name</label>
+                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Ostapovych">
+            </div>
+            <div class="mb-3">
+                <label for="nickname" class="form-label">Nickname</label>
+                <input type="text" class="form-control" name="nickname" id="nickname" placeholder="ostap123">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="ostap@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="********">
+            </div>
+            <button type="submit" class="btn btn-primary">Sign up</button>
+        </form>
+        <div class="mt-3 d-flex justify-content-center">
+            <a class="btn fw-semibold text-primary-emphasis" href='{{ "user:signin"|url }}'>I already have an account</a>
+        </div>
+    </div>  
+{% endblock %}

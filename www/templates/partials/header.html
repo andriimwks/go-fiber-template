@@ -1,0 +1,55 @@
+<header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <!-- burger toggler -->
+            <button class="d-lg-none btn fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list" style="color: #d4d4d4;"></i>
+            </button>
+
+            <!-- brand -->
+            <a class="navbar-brand me-0 me-lg-4" href="/">{{ title }}</a>
+
+            <!-- mobile sign in or profile button -->
+            {% if user %}
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle fs-4 d-lg-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle" style="color: #d4d4d4;"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                        <!-- <li><a class="dropdown-item" href='{{ "user:profile"|url }}'>My profile</a></li>
+                        <li><div class="dropdown-divider"></div></li> -->
+                        <li><a class="dropdown-item" href='{{ "user:signout"|url }}'>Sign out</a></li>
+                    </ul>                    
+                </div>
+            {% else %}
+                <a class="btn fs-4 d-lg-none" href='{{ "user:signin"|url }}'><i class="bi bi-box-arrow-in-right" style="color: #d4d4d4;"></i></a>
+            {% endif %}
+            
+            <!-- burger menu body -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- <li class="nav-item"> ... </li> -->
+                </ul>
+            </div>
+
+            <!-- pc menu -->
+            <div class="d-none d-lg-flex justify-content-end">
+                {% if user %}
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ user.first_name }} {{ user.last_name }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                            <!-- <li><a class="dropdown-item" href='{{ "user:profile"|url }}'>My profile</a></li>
+                            <li><div class="dropdown-divider"></div></li> -->
+                            <li><a class="dropdown-item" href='{{ "user:signout"|url }}'>Sign out</a></li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a class="me-1 btn btn-outline-primary rounded-pill" href='{{ "user:signin"|url }}'>Sign in</a>
+                    <a class="btn btn-primary rounded-pill" href='{{ "user:signup"|url }}'>Sign up</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</header>
