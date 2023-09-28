@@ -14,11 +14,6 @@ Download dependencies:
 go mod download
 ```
 
-Install fresh:
-```console
-go install github.com/zzwx/fresh@latest
-```
-
 Create .env file:
 ```dotenv
 JWT_SIGNING_KEY=YOUR_KEY
@@ -26,12 +21,13 @@ JWT_SIGNING_KEY=YOUR_KEY
 
 Run app using fresh:
 ```console
+go install github.com/zzwx/fresh@latest
 fresh
 ```
 
 ... or with `go run` command:
 ```console
-go run .
+go run ./cmd
 ```
 
 ## TODOs

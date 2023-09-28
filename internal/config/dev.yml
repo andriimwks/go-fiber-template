@@ -1,0 +1,18 @@
+server:
+  address: 127.0.0.1:8080
+
+limiter:
+  max: 100
+  expiration: 10s
+
+auth:
+  access_token_lifetime: 15m
+  refresh_token_lifetime: 60m
+
+security:
+  cors_allow_origins: "*"
+  cors_allow_methods: GET,POST
+  csrf_expiration: 1h
+
+sqlite:
+  path: ":memory:"

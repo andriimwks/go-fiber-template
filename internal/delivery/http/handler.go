@@ -3,20 +3,20 @@ package http
 import (
 	"net/http"
 
-	"github.com/andriimwks/go-fiber-template/config"
-	"github.com/andriimwks/go-fiber-template/user"
-	"github.com/andriimwks/go-fiber-template/www/templatetags"
+	"github.com/andriimwks/go-fiber-template/internal/config"
+	"github.com/andriimwks/go-fiber-template/internal/service"
+	"github.com/andriimwks/go-fiber-template/pkg/templatetags"
 	"github.com/gofiber/fiber/v2"
 )
 
 type handler struct {
-	app     *fiber.App
-	config  *config.Config
-	service user.Service
+	app      *fiber.App
+	config   *config.Config
+	services *service.Services
 }
 
-func Init(app *fiber.App, cfg *config.Config, service user.Service) {
-	h := handler{app, cfg, service}
+func Init(app *fiber.App, cfg *config.Config, services *service.Services) {
+	h := handler{app, cfg, services}
 	h.app.Use(h.authMiddleware)
 
 	h.app.Get("/", h.indexGET)
@@ -48,23 +48,14 @@ func (h *handler) signInPOST(c *fiber.Ctx) error {
 		return c.Redirect(templatetags.GetURL("index"))
 	}
 
-	var form user.SignInForm
-	if err := c.BodyParser(&form); err != nil {
+	var in service.SignInInput
+	if err := c.BodyParser(&in); err != nil {
 		return c.SendStatus(http.StatusBadRequest)
 	}
 
-	tp, err := h.service.SignIn(form)
+	tp, err := h.services.Users.SignIn(in)
 	if err != nil {
-		var msg string
-
-		switch err {
-		case user.ErrInvalidEmail:
-			msg = "Invalid email address"
-		case user.ErrIncorrectEmailOrPassword:
-			msg = "Invalid email and/or password"
-		}
-
-		return c.Render("pages/signin", fiber.Map{"errors": []string{msg}})
+		return c.Render("pages/signin", fiber.Map{"errors": []string{err.Error()}})
 	}
 
 	c.Cookie(&fiber.Cookie{Name: "ACCESS_TOKEN", Value: tp.AccessToken, Secure: true, HTTPOnly: true})
@@ -84,29 +75,15 @@ func (h *handler) signUpPOST(c *fiber.Ctx) error {
 		return c.Redirect(templatetags.GetURL("index"))
 	}
 
-	var form user.SignUpForm
-	if err := c.BodyParser(&form); err != nil {
+	var in service.SignUpInput
+	if err := c.BodyParser(&in); err != nil {
 		return c.SendStatus(http.StatusBadRequest)
 	}
 
-	tp, err := h.service.SignUp(form)
+	tp, err := h.services.Users.SignUp(in)
 	if err != nil {
-		var msg string
 
-		switch err {
-		case user.ErrEmptyFirstName:
-			msg = "Empty first name"
-		case user.ErrInvalidNickname:
-			msg = "Invalid nickname"
-		case user.ErrInvalidEmail:
-			msg = "Invalid email address"
-		case user.ErrInvalidPassword:
-			msg = "Weak password"
-		case user.ErrUserExists:
-			msg = "Such user already exists"
-		}
-
-		return c.Render("pages/signup", fiber.Map{"errors": []string{msg}})
+		return c.Render("pages/signup", fiber.Map{"errors": []string{err.Error()}})
 	}
 
 	c.Cookie(&fiber.Cookie{Name: "ACCESS_TOKEN", Value: tp.AccessToken, Secure: true, HTTPOnly: true})

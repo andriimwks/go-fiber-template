@@ -1,8 +1,8 @@
 package app
 
 import (
-	"github.com/andriimwks/go-fiber-template/config"
-	"github.com/andriimwks/go-fiber-template/models"
+	"github.com/andriimwks/go-fiber-template/internal/config"
+	"github.com/andriimwks/go-fiber-template/internal/models"
 	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

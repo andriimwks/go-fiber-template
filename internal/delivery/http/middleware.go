@@ -1,12 +1,12 @@
 package http
 
 import (
-	"github.com/andriimwks/go-fiber-template/user"
+	"github.com/andriimwks/go-fiber-template/internal/service"
 	"github.com/gofiber/fiber/v2"
 )
 
 func (h *handler) authMiddleware(c *fiber.Ctx) error {
-	tp, err := h.service.ValidateTokens(user.TokenPair{
+	tp, err := h.services.Users.ValidateTokens(service.TokenPair{
 		AccessToken:  c.Cookies("ACCESS_TOKEN"),
 		RefreshToken: c.Cookies("REFRESH_TOKEN"),
 	})
