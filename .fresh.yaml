@@ -1,9 +1,6 @@
-version: "1"
-root: .
 main_path: ./cmd
 tmp_path: ./.fresh
 valid_ext: .go, .html, .yaml
-# no_rebuild_ext: ""
 ignore: .fresh/*
 build_delay: 500ms
 debug: true
