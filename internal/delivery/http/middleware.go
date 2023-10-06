@@ -21,6 +21,6 @@ func (h *handler) authMiddleware(c *fiber.Ctx) error {
 	}
 
 	c.Locals("user", tp.Subject)
-	c.Bind(fiber.Map{"user": tp.Subject.Map()})
+	c.Bind(fiber.Map{"user": fiber.Map{"id": tp.Subject.ID}})
 	return c.Next()
 }

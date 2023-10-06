@@ -56,10 +56,8 @@ func (s *userService) SignUp(in SignUpInput) (*TokenPair, error) {
 	pwdHash, _ := bcrypt.GenerateFromPassword([]byte(in.Password), bcrypt.DefaultCost)
 
 	u, err := s.repos.Users.Create(models.User{
-		FirstName: in.FirstName,
-		LastName:  in.LastName,
-		Email:     in.Email,
-		Password:  string(pwdHash),
+		Email:    in.Email,
+		Password: string(pwdHash),
 	})
 	if err != nil {
 		return nil, err
