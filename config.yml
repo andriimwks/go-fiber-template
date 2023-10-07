@@ -1,0 +1,6 @@
+server:
+  address: 127.0.0.1:8080
+
+auth:
+  access_token_lifetime: 15m
+  refresh_token_lifetime: 60m

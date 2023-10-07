@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"log"
 
 	"github.com/andriimwks/go-fiber-template/internal/app"
@@ -10,10 +9,7 @@ import (
 )
 
 func main() {
-	configName := flag.String("config", "dev", "")
-	flag.Parse()
-
-	cfg, err := config.Load("./configs", *configName)
+	cfg, err := config.Load(".", "config")
 	if err != nil {
 		log.Fatal(err)
 	}

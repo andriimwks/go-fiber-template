@@ -14,21 +14,13 @@ const (
 )
 
 type Config struct {
-	Server   ServerConfig   `mapstructure:"server"`
-	Limiter  LimiterConfig  `mapstructure:"limiter"`
-	Auth     AuthConfig     `mapstructure:"auth"`
-	Security SecurityConfig `mapstructure:"security"`
-	SQLite   SQLiteConfig   `mapstructure:"sqlite"`
-	Env      EnvConfig
+	Server ServerConfig `mapstructure:"server"`
+	Auth   AuthConfig   `mapstructure:"auth"`
+	Env    EnvConfig
 }
 
 type ServerConfig struct {
 	Address string `mapstructure:"address"`
-}
-
-type LimiterConfig struct {
-	Max        int           `mapstructure:"max"`
-	Expiration time.Duration `mapstructure:"expiration"`
 }
 
 type AuthConfig struct {
@@ -36,17 +28,8 @@ type AuthConfig struct {
 	RefreshTokenLifetime time.Duration `mapstructure:"refresh_token_lifetime"`
 }
 
-type SecurityConfig struct {
-	CorsAllowOrigins string        `mapstructure:"cors_allow_origins"`
-	CorsAllowMethods string        `mapstructure:"cors_allow_methods"`
-	CsrfExpiration   time.Duration `mapstructure:"csrf_expiration"`
-}
-
-type SQLiteConfig struct {
-	Path string `mapstructure:"path"`
-}
-
 type EnvConfig struct {
+	SQLitePath    string `envconfig:"SQLITE_PATH"`
 	JwtSigningKey string `envconfig:"JWT_SIGNING_KEY"`
 }
 

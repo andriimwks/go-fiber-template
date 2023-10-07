@@ -14,13 +14,6 @@ func newRouter(cfg *config.Config) *fiber.App {
 		AppName:      "go-fiber-template",
 	})
 	r.Static("/static", "./www/static")
-	r.Use(
-		recover.New(),
-		loggerMiddleware,
-		compressMiddleware,
-		corsMiddleware(cfg.Security.CorsAllowOrigins, cfg.Security.CorsAllowMethods),
-		csrfMiddleware(cfg.Security.CsrfExpiration),
-		limiterMiddleware(cfg.Limiter.Max, cfg.Limiter.Expiration),
-	)
+	r.Use(recover.New(), loggerMiddleware, csrfMiddleware)
 	return r
 }

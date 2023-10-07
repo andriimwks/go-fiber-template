@@ -9,7 +9,7 @@ import (
 )
 
 func newDatabase(cfg *config.Config) (*gorm.DB, error) {
-	db, err := gorm.Open(sqlite.Open(cfg.SQLite.Path), &gorm.Config{Logger: logger.Default.LogMode(logger.Silent)})
+	db, err := gorm.Open(sqlite.Open(cfg.Env.SQLitePath), &gorm.Config{Logger: logger.Default.LogMode(logger.Silent)})
 	if err != nil {
 		return nil, err
 	}
