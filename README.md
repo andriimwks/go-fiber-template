@@ -8,6 +8,7 @@ go mod download
 
 Create .env file:
 ```dotenv
+SQLITE_PATH=FILE_PATH
 JWT_SIGNING_KEY=YOUR_KEY
 ```
 
